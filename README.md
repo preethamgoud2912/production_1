@@ -82,9 +82,26 @@ The frontend runs at **http://localhost:5173**.
 
 ## Face Recognition Models
 
-On first run, the setup script downloads **buffalo_l** (~330MB), a ResNet50-based model that works well for most use cases.
+The system supports two models:
 
-For higher accuracy (especially at distance or with profile views), you can use **antelopev2** (ResNet100). This model must be obtained separately and placed in `~/.insightface/models/antelopev2/`. The system will automatically prefer it when available.
+| Model | Backbone | Accuracy | Auto-downloads? |
+|-------|----------|----------|-----------------|
+| **buffalo_l** (default) | ResNet50 | Good | Yes — downloaded during setup |
+| **antelopev2** (upgrade) | ResNet100 | Best — 2x better on hard cases | One-command install |
+
+The setup script installs **buffalo_l** automatically. The system works immediately.
+
+To upgrade to the higher-accuracy **antelopev2** model (recommended):
+
+```bash
+# macOS / Linux
+./upgrade_model.sh
+
+# Windows
+upgrade_model.bat
+```
+
+This downloads the model (~344MB) from the GitHub release. The backend will automatically use antelopev2 when it's present.
 
 ## Configuration
 
@@ -133,8 +150,9 @@ production_1/
 │   │   └── hooks/          # custom React hooks
 │   ├── .env.example        # environment template
 │   └── package.json
-├── setup.sh / setup.bat    # one-time setup
-├── start.sh / start.bat    # start both servers
+├── setup.sh / setup.bat              # one-time setup
+├── start.sh / start.bat              # start both servers
+├── upgrade_model.sh / upgrade_model.bat  # optional: install antelopev2
 └── README.md
 ```
 
