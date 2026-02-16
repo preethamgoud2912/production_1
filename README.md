@@ -80,28 +80,11 @@ The frontend runs at **http://localhost:5173**.
 2. **Live Recognition** - Start the camera feed; the system detects and identifies enrolled students in real-time
 3. **Attendance** - Recognized students are automatically marked present (once per day)
 
-## Face Recognition Models
+## Face Recognition Model
 
-The system supports two models:
+The setup script automatically downloads **antelopev2** (ResNet100, ~344MB) — the highest accuracy model available. This is a one-time download during setup.
 
-| Model | Backbone | Accuracy | Auto-downloads? |
-|-------|----------|----------|-----------------|
-| **buffalo_l** (default) | ResNet50 | Good | Yes — downloaded during setup |
-| **antelopev2** (upgrade) | ResNet100 | Best — 2x better on hard cases | One-command install |
-
-The setup script installs **buffalo_l** automatically. The system works immediately.
-
-To upgrade to the higher-accuracy **antelopev2** model (recommended):
-
-```bash
-# macOS / Linux
-./upgrade_model.sh
-
-# Windows
-upgrade_model.bat
-```
-
-This downloads the model (~344MB) from the GitHub release. The backend will automatically use antelopev2 when it's present.
+If the download fails (e.g. network issues), the system falls back to **buffalo_l** (ResNet50) which still provides good accuracy.
 
 ## Configuration
 
